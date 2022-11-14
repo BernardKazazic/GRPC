@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "fer.rassus.lab1";
+
+package fer.rassus.lab1;
+
+import "google/protobuf/struct.proto";
+
+service Sensor {
+  rpc getMeasurement (RequestResponseMessage) returns (MeasurementGrpc);
+  rpc sendMeasurement (MeasurementGrpc) returns (RequestResponseMessage);
+}
+
+message MeasurementGrpc {
+  int32 temperature = 1;
+  int32 pressure = 2;
+  int32 humidity = 3;
+  Co co = 4;
+  No2 no2 = 5;
+  So2 so2 = 6;
+}
+
+message Co {
+  oneof kind {
+    google.protobuf.NullValue null = 1;
+    int32 co = 2;
+  }
+}
+
+message No2 {
+  oneof kind {
+    google.protobuf.NullValue null = 1;
+    int32 no2 = 2;
+  }
+}
+
+message So2 {
+  oneof kind {
+    google.protobuf.NullValue null = 1;
+    int32 so2 = 2;
+  }
+}
+
+message RequestResponseMessage {
+}
